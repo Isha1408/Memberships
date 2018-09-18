@@ -21,6 +21,6 @@ namespace Memberships.Entities
         public string ImageUrl { get; set; }
 
         public int ProductLinkTextId { get; set; }
-        public int ProductTypeid { get; set; }
+        public int ProductTypeId { get; set; }
     }
 }

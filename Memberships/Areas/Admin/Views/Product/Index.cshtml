@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Memberships.Entities.Item>
+﻿@model IEnumerable<Memberships.Areas.Admin.Models.ProductModel>
 @using Memberships.Areas.Admin.Models;
 
 
@@ -21,15 +21,13 @@
         </th>
 
         <th>
-            @Html.DisplayNameFor(model => model.HTML)
+            @Html.DisplayNameFor(model => model.ProductLinkTexts)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.WaitDays)
+            @Html.DisplayNameFor(model => model.ProductType)
         </th>
 
-        <th>
-            @Html.DisplayNameFor(model => model.IsFree)
-        </th>
+      
         <th></th>
     </tr>
 
@@ -44,14 +42,12 @@
             </td>
 
             <td>
-                @Html.DisplayFor(modelItem => item.HTML)
+                @Html.DisplayFor(modelItem => item.ProductLinkTexts)
+                @{@Html.DisplayFor(modelItem => item.ProductLinkTextId)})
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.WaitDays)
-            </td>
-
-            <td>
-                @Html.DisplayFor(modelItem => item.IsFree)
+                @Html.DisplayFor(modelItem => item.ProductTypes)
+                @{@Html.DisplayFor(modelItem => item.ProductTypeId)})
             </td>
             @Html.Partial("_TableButtonsPartial", new SmallButtonModel { Id = item.Id })
         </tr>
