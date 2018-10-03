@@ -21,7 +21,7 @@ namespace Memberships.Areas.Admin.Controllers
         // GET: Admin/ProductItem
         public async Task<ActionResult> Index()
         {
-            return View(await db.ProductItems.Convert(db));
+            return View(await db.SubscriptionProduct.Convert(db));
         }
 
         // GET: Admin/ProductItem/Details/5
@@ -60,7 +60,7 @@ namespace Memberships.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.ProductItems.Add(productItem);
+                db.SubscriptionProduct.Add(productItem);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
@@ -122,7 +122,7 @@ namespace Memberships.Areas.Admin.Controllers
         public async Task<ActionResult> DeleteConfirmed(int itemId, int productId)
         {
             ProductItem productItem = await GetProductItem(itemId, productId);
-            db.ProductItems.Remove(productItem);
+            db.SubscriptionProduct.Remove(productItem);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
@@ -134,7 +134,7 @@ namespace Memberships.Areas.Admin.Controllers
                 int itmId = 0, prdId = 0;
                 int.TryParse(itemId.ToString(), out itmId);
                 int.TryParse(productId.ToString(), out prdId);
-                var productItem = await db.ProductItems.FirstOrDefaultAsync(pi => pi.ProductId.Equals(prdId) && pi.ItemId.Equals(itmId));
+                var productItem = await db.SubscriptionProduct.FirstOrDefaultAsync(pi => pi.ProductId.Equals(prdId) && pi.ItemId.Equals(itmId));
                 return productItem;
             }
             catch
