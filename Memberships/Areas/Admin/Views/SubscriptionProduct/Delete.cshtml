@@ -1,4 +1,6 @@
-﻿@model Memberships.Entities.SubscriptionProduct
+﻿@model Memberships.Areas.Admin.Models.SubscriptionProductModel
+@using Memberships.Areas.Admin.Models
+
 
 @{
     ViewBag.Title = "Delete";
@@ -11,14 +13,32 @@
     <h4>SubscriptionProduct</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(m => m.SubscriptionTitle)
+        </dt>
+        <dd>
+            @Html.DisplayFor(m => m.SubscriptionTitle)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(m => m.ProductTitle)
+        </dt>
+        <dd>
+            @Html.DisplayFor(m => m.ProductTitle)
+        </dd>
+
+
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Delete" class="btn btn-danger btn-sm" />
+
+            @Html.Partial("_EditButtonDetailPartial", new EditButtonModel { SubscriptionId = Model.SubscriptionId, ProductId = Model.ProductId })
+
+            @Html.Partial("_BackToListButtonPartial")
         </div>
     }
 </div>

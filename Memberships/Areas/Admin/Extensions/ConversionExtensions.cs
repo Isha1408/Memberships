@@ -96,9 +96,9 @@ namespace Memberships.Areas.Admin.Extensions
         // The purpose of this method is to change the existing pair and replace with newone.
         public static async Task<bool> CanChange(this ProductItem productItem,ApplicationDbContext db)
         {
-            var oldPI = await db.SubscriptionProduct.CountAsync(pi => pi.ProductId.Equals(productItem.OldProductId)
+            var oldPI = await db.ProductItems.CountAsync(pi => pi.ProductId.Equals(productItem.OldProductId)
                                   && pi.ItemId.Equals(productItem.OldItemId));
-            var newPI = await db.SubscriptionProduct.CountAsync(pi => pi.ProductId.Equals(productItem.ProductId)
+            var newPI = await db.ProductItems.CountAsync(pi => pi.ProductId.Equals(productItem.ProductId)
                                   && pi.ItemId.Equals(productItem.ItemId));
 
             return oldPI.Equals(1) && newPI.Equals(0);
@@ -106,9 +106,9 @@ namespace Memberships.Areas.Admin.Extensions
         }
         public static async Task Change(this ProductItem productItem, ApplicationDbContext db)
         {
-            var oldProductItem = await db.SubscriptionProduct.FirstOrDefaultAsync(pi => pi.ProductId.Equals(productItem.OldProductId)
+            var oldProductItem = await db.ProductItems.FirstOrDefaultAsync(pi => pi.ProductId.Equals(productItem.OldProductId)
                                 && pi.ItemId.Equals(productItem.OldItemId));
-            var newProductItem = await db.SubscriptionProduct.FirstOrDefaultAsync(pi => pi.ProductId.Equals(productItem.ProductId)
+            var newProductItem = await db.ProductItems.FirstOrDefaultAsync(pi => pi.ProductId.Equals(productItem.ProductId)
                                && pi.ItemId.Equals(productItem.ItemId));
 
             if(oldProductItem!=null && newProductItem==null)
@@ -121,8 +121,8 @@ namespace Memberships.Areas.Admin.Extensions
                 using (var transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
                 {
                     try {
-                        db.SubscriptionProduct.Remove(oldProductItem);
-                        db.SubscriptionProduct.Add(newProductItem);
+                        db.ProductItems.Remove(oldProductItem);
+                        db.ProductItems.Add(newProductItem);
                         await db.SaveChangesAsync();
                         transaction.Complete();
                     }
@@ -144,7 +144,7 @@ namespace Memberships.Areas.Admin.Extensions
                           { 
                               SubscriptionId = pi.SubscriptionId,
                               ProductId = pi.ProductId,
-                            SubscriptionTitle = db.Items.FirstOrDefault(i => i.Id.Equals(pi.SubscriptionId)).Title,
+                            SubscriptionTitle = db.Subscriptions.FirstOrDefault(i => i.Id.Equals(pi.SubscriptionId)).Title,
                               ProductTitle = db.Products.FirstOrDefault(i => i.Id.Equals(pi.ProductId)).Title
 
                           }).ToListAsync();
