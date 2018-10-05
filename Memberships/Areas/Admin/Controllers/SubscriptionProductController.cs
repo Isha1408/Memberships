@@ -36,7 +36,7 @@ namespace Memberships.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            return View(subscriptionProduct.Convert(db));
+            return View(await subscriptionProduct.Convert(db));
         }
 
         // GET: Admin/SubscriptionProduct/Create
@@ -80,7 +80,7 @@ namespace Memberships.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            return View(subscriptionProduct.Convert(db));
+            return View(await subscriptionProduct.Convert(db));
         }
 
         // POST: Admin/SubscriptionProduct/Edit/5
@@ -97,7 +97,7 @@ namespace Memberships.Areas.Admin.Controllers
                     await subscriptionProduct.Change(db);
                 return RedirectToAction("Index");
             }
-            return View(subscriptionProduct);
+            return View( subscriptionProduct);
         }
 
         // GET: Admin/SubscriptionProduct/Delete/5
@@ -112,7 +112,7 @@ namespace Memberships.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            return View(subscriptionProduct.Convert(db));
+            return View(await subscriptionProduct.Convert(db));
         }
 
         // POST: Admin/SubscriptionProduct/Delete/5

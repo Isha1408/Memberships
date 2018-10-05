@@ -176,7 +176,7 @@ namespace Memberships.Areas.Admin.Extensions
             var oldSP = await db.SubscriptionProducts.CountAsync(sp =>sp.ProductId.Equals(subscriptionProduct.OldProductId)
                                   && sp.SubscriptionId.Equals(subscriptionProduct.OldSubscriptionId));
             var newSP = await db.SubscriptionProducts.CountAsync(sp => sp.ProductId.Equals(subscriptionProduct.ProductId)
-                                  && sp.SubscriptionId.Equals(subscriptionProduct.OldSubscriptionId));
+                                  && sp.SubscriptionId.Equals(subscriptionProduct.SubscriptionId));
 
             return oldSP.Equals(1) && newSP.Equals(0);
 
